@@ -6,11 +6,13 @@ import Input from "../common/Input";
 interface UserFormProps {
   initialValues?: Partial<User>;
   onSubmit: (data: any) => void;
+  onCancel: (data: any) => void;
 }
 
 const UserForm = ({
   initialValues,
   onSubmit,
+  onCancel,
 }: UserFormProps) => {
   const {
     register,
@@ -58,9 +60,20 @@ const UserForm = ({
         }
       />
 
-      <Button type="submit">
-        Save User
-      </Button>
+      <div className="flex gap-2 mt-4">
+        <Button type="submit">
+          Save User
+        </Button>
+
+        <Button
+          type="button"
+          onClick={onCancel}
+          variant="secondary"
+        >
+          Cancel
+        </Button>
+      </div>
+
     </form>
   );
 };

@@ -24,6 +24,34 @@ export const useUsers = () => {
     }
   };
 
+  const createUser = async (
+    data: any
+  ) => {
+    await userService.createUser(data);
+
+    await fetchUsers();
+  };
+
+  const updateUser = async (
+    id: string,
+    data: any
+  ) => {
+    await userService.updateUser(
+      id,
+      data
+    );
+
+    await fetchUsers();
+  };
+
+  const deleteUser = async (
+    id: string
+  ) => {
+    await userService.deleteUser(id);
+
+    await fetchUsers();
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -34,5 +62,8 @@ export const useUsers = () => {
     loading,
     error,
     fetchUsers,
+    createUser,
+    deleteUser,
+    updateUser
   };
 };
