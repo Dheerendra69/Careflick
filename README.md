@@ -17,6 +17,12 @@ The application allows caregivers to submit forms for residents and view previou
 
 ---
 
+## Live Demo
+
+**[Explore](https://careflick.netlify.app/)**
+
+---
+
 ## Features
 
 ### User Management
@@ -174,7 +180,7 @@ PORT=4000
 MONGO_URI=<your-mongodb-atlas-uri>
 
 ```
-I have used mongod-db for deployment
+I have used mongod-db-atlas for deployment.
 
 ---
 
