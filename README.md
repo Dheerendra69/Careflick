@@ -13,8 +13,6 @@ The application allows caregivers to submit forms for residents and view previou
 
 ## Demo
 
-> Add your application screenshot below.
-
 ![Careflick Hero Page](website-demo/Hero-Page.png)
 
 ---
