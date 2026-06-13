@@ -12,4 +12,6 @@ export interface SubmittedForm {
   formData: Record<string, any>;
 
   submittedAt: string;
+
+  createdAt: string | null;
 }

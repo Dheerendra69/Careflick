@@ -5,13 +5,13 @@ import UserList from "../components/users/UserList";
 import UserModal from "../components/users/UserModal";
 
 import { useUsers } from "../hooks/useUsers";
-import { useAppContext } from "../context/AppContext";
+// import { useAppContext } from "../context/AppContext";
 import { formService } from "../services/formService";
 
 const UsersPage = () => {
   const { users } = useUsers();
 
-  const { forms } = useAppContext();
+  // const { forms } = useAppContext();
 
   const [userForms, setUserForms] =
   useState([]);
@@ -39,11 +39,11 @@ const UsersPage = () => {
     });
   }, [users, search]);
 
-  const selectedUserForms =
-    forms.filter(
-      (form) =>
-        form.userId === selectedUser?.id
-    );
+  // const selectedUserForms =
+  //   forms.filter(
+  //     (form) =>
+  //       form.userId === selectedUser?.id
+  //   );
   
   const handleUserClick =
   async (user: any) => {

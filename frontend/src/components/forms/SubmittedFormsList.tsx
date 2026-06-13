@@ -31,9 +31,11 @@ const SubmittedFormsList = ({
             </h4>
 
             <span className="text-sm text-gray-500">
-              {new Date(
-                form.createdAt
-              ).toLocaleString()}
+              {form.createdAt
+              ? new Date(
+                  form.createdAt
+                ).toLocaleString()
+              : "-"}
             </span>
           </div>
 

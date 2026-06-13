@@ -10,7 +10,7 @@ const IncidentReportForm = ({
   users,
   onSubmit,
 }: Props) => {
-  const { register, handleSubmit, reset } =
+  const { register, handleSubmit } =
     useForm();
 
   return (
