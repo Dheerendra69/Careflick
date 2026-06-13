@@ -12,7 +12,7 @@ export interface Company {
 }
 
 export interface User {
-  id: number | string;
+  _id: number | string;
 
   name: string;
 

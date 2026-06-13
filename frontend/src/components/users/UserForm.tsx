@@ -88,39 +88,6 @@ const UserForm = ({
               "Phone number is too short",
           },
 
-          maxLength: {
-            value: 20,
-            message:
-              "Phone number is too long",
-          },
-
-          validate: (value) => {
-            const plusCount =
-              (value.match(/\+/g) || [])
-                .length;
-
-            const dashCount =
-              (value.match(/-/g) || [])
-                .length;
-
-            if (plusCount > 1) {
-              return "Only one '+' is allowed";
-            }
-
-            if (dashCount > 1) {
-              return "Only one '-' is allowed";
-            }
-
-            if (
-              !/^[0-9+\-\s()]+$/.test(
-                value
-              )
-            ) {
-              return "Phone contains invalid characters";
-            }
-
-            return true;
-          },
         })}
         error={
           errors.phone?.message as string

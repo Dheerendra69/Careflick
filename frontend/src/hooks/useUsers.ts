@@ -33,7 +33,7 @@ export const useUsers = () => {
   };
 
   const updateUser = async (
-    id: string,
+    id: string | number,
     data: any
   ) => {
     await userService.updateUser(
@@ -45,7 +45,7 @@ export const useUsers = () => {
   };
 
   const deleteUser = async (
-    id: string
+    id: string | number
   ) => {
     await userService.deleteUser(id);
 
