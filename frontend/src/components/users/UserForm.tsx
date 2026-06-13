@@ -6,7 +6,7 @@ import Input from "../common/Input";
 interface UserFormProps {
   initialValues?: Partial<User>;
   onSubmit: (data: any) => void;
-  onCancel: (data: any) => void;
+  onCancel: () => void;
 }
 
 const UserForm = ({
@@ -17,8 +17,12 @@ const UserForm = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {
+      errors,
+      isValid,
+    },
   } = useForm({
+    mode: "onChange",
     defaultValues: {
       name: initialValues?.name || "",
       email: initialValues?.email || "",
@@ -29,11 +33,28 @@ const UserForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4"
     >
       <Input
         label="Name"
         {...register("name", {
           required: "Name is required",
+          minLength: {
+            value: 2,
+            message:
+              "Name must be at least 2 characters",
+          },
+          maxLength: {
+            value: 50,
+            message:
+              "Name cannot exceed 50 characters",
+          },
+          pattern: {
+            value:
+              /^[a-zA-Z\s.'-]+$/,
+            message:
+              "Name contains invalid characters",
+          },
         })}
         error={
           errors.name?.message as string
@@ -44,6 +65,12 @@ const UserForm = ({
         label="Email"
         {...register("email", {
           required: "Email is required",
+          pattern: {
+            value:
+              /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message:
+              "Enter a valid email address",
+          },
         })}
         error={
           errors.email?.message as string
@@ -53,7 +80,47 @@ const UserForm = ({
       <Input
         label="Phone"
         {...register("phone", {
-          required: "Phone is required",
+          required: "Phone number is required",
+
+          minLength: {
+            value: 7,
+            message:
+              "Phone number is too short",
+          },
+
+          maxLength: {
+            value: 20,
+            message:
+              "Phone number is too long",
+          },
+
+          validate: (value) => {
+            const plusCount =
+              (value.match(/\+/g) || [])
+                .length;
+
+            const dashCount =
+              (value.match(/-/g) || [])
+                .length;
+
+            if (plusCount > 1) {
+              return "Only one '+' is allowed";
+            }
+
+            if (dashCount > 1) {
+              return "Only one '-' is allowed";
+            }
+
+            if (
+              !/^[0-9+\-\s()]+$/.test(
+                value
+              )
+            ) {
+              return "Phone contains invalid characters";
+            }
+
+            return true;
+          },
         })}
         error={
           errors.phone?.message as string
@@ -61,19 +128,26 @@ const UserForm = ({
       />
 
       <div className="flex gap-2 mt-4">
-        <Button type="submit">
+        <Button
+          type="submit"
+          disabled={!isValid}
+          className={
+            !isValid
+              ? "opacity-0 pointer-events-none"
+              : ""
+          }
+        >
           Save User
         </Button>
 
         <Button
           type="button"
-          onClick={onCancel}
           variant="secondary"
+          onClick={onCancel}
         >
           Cancel
         </Button>
       </div>
-
     </form>
   );
 };
